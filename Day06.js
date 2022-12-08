@@ -80,14 +80,43 @@ for (const property in student) {
  * */
 
 class Human {
-    constructor(_name, _birth, _gender) {
+    // Private property
+    #religion;
+    constructor(_name, _birth, _gender, _religion) {
         this.name = _name;
         this.birth = _birth;
         this.gender = _gender;
+        this.#religion = _religion;
+    }
+
+
+    getAge = () => {
+        console.log(this.birth.split('-'));
+        let birthYear = parseInt(this.birth.split('-')[2]);
+        console.log(birthYear);
+        let date = new Date();
+        return date.getFullYear() - birthYear;
+    }
+
+    // Methode 
+    introduce = () => {
+        return `My name is ${this.name}, I born at ${this.birth}, my age ${this.getAge()}, religion ${this.#religion}`;
     }
 }
 
+let human01 = new Human('Abdi', '12-11-1980', 'Male', 'Islam');
+console.log(human01);
 console.log(new Human('Abdi', '12-11-1980', 'Male'));
+
+// Inheritance = pewarisan data dari class utama agar bisa digunakan class turunannya
+
+class Pekerjaan extends Human {
+    constructor(_nama, _tglLahir, _gender, _posisi, _gaji) {
+        super(_name, _tglLahir, _gender); // Menggunakan property dari class Human
+        this.posisi = _posisi;
+        this.gaji = _gaji;
+    }
+}
 
 // ARRAY of OBJECT
 let people = [
@@ -96,7 +125,6 @@ let people = [
     new Human('Zafran', '09-01-1985', 'Male')
 ];
 console.log(people[1].gender);
-
 
 let product = [
     {
@@ -111,3 +139,4 @@ let product = [
     }
 ];
 
+console.log(product);
