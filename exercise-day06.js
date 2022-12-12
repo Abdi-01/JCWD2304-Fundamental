@@ -79,7 +79,7 @@ class Transaction {
             product: { ...product, qty },
             subTotal: qty * product?.price
         })
-        this.cart.forEach(val => amount += val.subTotal);
+        this.cart.forEach((val) => amount += val.subTotal);
         this.total = amount;
     }
 
@@ -99,8 +99,12 @@ class Transaction {
     }
 }
 let transaction = new Transaction();
+console.log(dbProduct);
 transaction.addToCart(dbProduct[0], 3);
-transaction.addToCart(dbProduct[1], 1);
+transaction.addToCart(dbProduct[1], 3);
+console.log(transaction.show());
+// transaction.addToCart(dbProduct[1], 1);
+console.log(transaction.checkout());
 
 // let a = [1, 2, 3, 4];
 // console.log(a);
