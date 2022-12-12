@@ -42,12 +42,5 @@ for (let i = 0; i < limit; i++) {
     print+='\n';
     // i = 0 --> print = # # # # # \n
     // i = 1 --> print = # # # # # \n# # # # # \n
-
+}
 console.log(print);
-
-// Triangle
-// #
-// # #
-// # # #
-// # # # #
-// # # # # #

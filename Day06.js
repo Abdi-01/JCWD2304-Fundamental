@@ -112,11 +112,14 @@ console.log(new Human('Abdi', '12-11-1980', 'Male'));
 
 class Pekerjaan extends Human {
     constructor(_nama, _tglLahir, _gender, _posisi, _gaji) {
-        super(_name, _tglLahir, _gender); // Menggunakan property dari class Human
+        super(_nama, _tglLahir, _gender); // Menggunakan property dari class Human
         this.posisi = _posisi;
         this.gaji = _gaji;
+        this.usia = this.getAge();
     }
 }
+
+console.log(new Pekerjaan('Edo', '11-11-2001', 'Male', 'CTO', 20000000));
 
 // ARRAY of OBJECT
 let people = [
@@ -139,4 +142,14 @@ let product = [
     }
 ];
 
-console.log(product);
+let print = product.map((val, idx) => `${idx + 1}. ${val.name}, available stock ${val.stock}, ${val.price.toLocaleString('id', {
+    style: 'currency',
+    currency: 'idr'
+})}`);
+
+console.log(print);
+console.log(print.join('\n'));
+
+let amount = 0;
+product.forEach(val => amount += val.stock);
+console.log('Total stock -->', amount);
