@@ -68,29 +68,31 @@ let dbProduct = [
 ]
 
 class Transaction {
-
     constructor() {
         this.cart = [];
+        this.total = 0;
     }
 
-    addToCart = (product = '', qty = 1) => {
+    addToCart = (product = null, qty = 1) => {
+        let amount = 0;
         this.cart.push({
             product: { ...product, qty },
-            total: qty * product?.price
+            subTotal: qty * product?.price
         })
+        this.cart.forEach(val => amount += val.subTotal);
+        this.total = amount;
     }
-    totalPayment = () => {
-        let amount = 0;
-        this.cart.forEach(val => amount += val.total)
-        return amount;
+
+    show = () => {
+        return 'Your total trasaction Rp.' + this.total.toLocaleString('id');
     }
 
     checkout = () => {
         let print = '';
         this.cart.forEach((val, idx) => {
-            print += `${idx + 1}. ${val.product.name}, ${val.product.price.toLocaleString('id', { style: "currency", currency: "IDR" })}, Qty: ${val.product.qty}, ${val.total.toLocaleString('id', { style: "currency", currency: "IDR" })}\n`;
+            print += `${idx + 1}. ${val.product.name}, ${val.product.price.toLocaleString('id', { style: "currency", currency: "IDR" })}, Qty: ${val.product.qty}, ${val.subTotal.toLocaleString('id', { style: "currency", currency: "IDR" })}\n`;
         })
-        print += `Total payment : ${this.totalPayment().toLocaleString('id', { style: "currency", currency: "IDR" })}`
+        print += `Total payment : ${this.total.toLocaleString('id', { style: "currency", currency: "IDR" })}`
 
         this.cart = [];
         return print;
