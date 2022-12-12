@@ -29,7 +29,7 @@ console.log(dbStudent);
 //     score: 50
 // }];
 // tempScore.sort((a, b) => a.score - b.score);
-console.log(tempScore);
+// console.log(tempScore);
 let calculateStudent = (arr) => {
     let scrTotal = 0, ageTotal = 0;
     let scores = [...arr.sort((a, b) => a.score - b.score)];
@@ -98,20 +98,18 @@ class Transaction {
         return print;
     }
 }
-let transaction = new Transaction()
+let transaction = new Transaction();
 transaction.addToCart(dbProduct[0], 3);
 transaction.addToCart(dbProduct[1], 1);
-console.log(transaction.checkout());
 
+// let a = [1, 2, 3, 4];
+// console.log(a);
+// let b = [...a];
+// console.log(b);
+// b[0] = 10;
+// console.log(a);
+// console.log(b);
 
-let a = [1, 2, 3, 4];
-console.log(a);
-let b = [...a];
-console.log(b);
-b[0] = 10;
-console.log(a);
-console.log(b);
-
-// let c = [...a,...b]
-let c = a.concat(b)
-console.log(c);
+// // let c = [...a,...b]
+// let c = a.concat(b)
+// console.log(c);
