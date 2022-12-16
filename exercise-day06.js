@@ -30,9 +30,12 @@ console.log(dbStudent);
 // }];
 // tempScore.sort((a, b) => a.score - b.score);
 // console.log(tempScore);
+let asc = (a, b) => {
+    return a.score - b.score
+};
 let calculateStudent = (arr) => {
     let scrTotal = 0, ageTotal = 0;
-    let scores = [...arr.sort((a, b) => a.score - b.score)];
+    let scores = [...arr.sort(asc)];
     let ages = [...arr.sort((a, b) => a.age - b.age)];
 
     for (let i = 0; i < arr.length; i++) {
@@ -76,7 +79,7 @@ class Transaction {
     addToCart = (product = null, qty = 1) => {
         let amount = 0;
         this.cart.push({
-            product: { ...product, qty },
+            ...product, qty,
             subTotal: qty * product?.price
         })
         this.cart.forEach((val) => amount += val.subTotal);
@@ -89,8 +92,9 @@ class Transaction {
 
     checkout = () => {
         let print = '';
+        console.log(this.cart);
         this.cart.forEach((val, idx) => {
-            print += `${idx + 1}. ${val.product.name}, ${val.product.price.toLocaleString('id', { style: "currency", currency: "IDR" })}, Qty: ${val.product.qty}, ${val.subTotal.toLocaleString('id', { style: "currency", currency: "IDR" })}\n`;
+            print += `${idx + 1}. ${val.name}, ${val.price.toLocaleString('id', { style: "currency", currency: "IDR" })}, Qty: ${val.qty}, ${val.subTotal.toLocaleString('id', { style: "currency", currency: "IDR" })}\n`;
         })
         print += `Total payment : ${this.total.toLocaleString('id', { style: "currency", currency: "IDR" })}`
 
