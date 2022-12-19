@@ -102,5 +102,69 @@ console.log(attendanceFT.working);
 console.log(attendanceFT.totalSalary().toLocaleString('id', { style: "currency", currency: "IDR" }));
 console.log(attendancePT.working);
 console.log(attendancePT.totalSalary().toLocaleString('id', { style: "currency", currency: "IDR" }));
-let printWorking = attendancePT.working.map((val,idx)=>`Day-${idx+1} ${val.name} working ${val.dayliHour}hr and dayli salary ${val.dayliSalary}`)
+let printWorking = attendancePT.working.map((val, idx) => `Day-${idx + 1} ${val.name} working ${val.dayliHour}hr and dayli salary ${val.dayliSalary}`)
 console.log(printWorking.join('\n'));
+
+
+// Exercise 2
+class Player {
+    constructor(_name, _health = 100, _power = 10) {
+        this.name = _name;
+        this.health = _health;
+        this.power = _power;
+    }
+
+    hit = (pwr) => {
+        this.health -= pwr;
+        return `Health reduce by ${pwr}`;
+    }
+
+    useItem = (item) => {
+        this.health += item?.health || 0;
+        this.power += item?.power || 0;
+        return `Update Health => ${this.health}, Power => ${this.power}`;
+    }
+
+    showStatus = () => {
+        return `Player ${this.name} (Health=>${this.health} | Power=>${this.power})`;
+    };
+}
+
+class ShootingGame {
+    constructor(_playerA, _playerB) {
+        this.playerA = _playerA;
+        this.playerB = _playerB;
+    }
+
+    getRandomItem = () => {
+        let item = ['health', 'power'];
+        let getIdx = Math.round(Math.random());
+        return {
+            [item[getIdx]]: 10
+        };
+    }
+
+    start = () => {
+        // console.log(this.playerA.showStatus());
+        // console.log(this.playerB.showStatus());
+        while (true) {
+            console.log("BEFORE", `${this.playerA.showStatus()}\n${this.playerB.showStatus()}`);
+            this.playerA.useItem(this.getRandomItem());
+            this.playerB.useItem(this.getRandomItem());
+            this.playerA.hit(this.playerB.power);
+            this.playerB.hit(this.playerA.power);
+            console.log("AFTER", `${this.playerA.showStatus()}\n${this.playerB.showStatus()}`);
+            if (this.playerA.health <= 0) {
+                return `WINNER ${this.playerB.name}`
+            }
+            if (this.playerB.health <= 0) {
+                return `WINNER ${this.playerA.name}`
+            }
+        }
+    }
+}
+
+let playerA = new Player("Edo");
+let playerB = new Player("Andrew");
+let shooting = new ShootingGame(playerA, playerB);
+console.log(shooting.start());
